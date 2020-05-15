@@ -5,6 +5,9 @@ export const NavbarLinks = () => {
   return (
     <ul id="nav-mobile" className="right hide-on-med-and-down">
       <li>
+        <NavLink to="/create">Post</NavLink>
+      </li>
+      <li>
         <NavLink to="/about">About</NavLink>
       </li>
       <li>

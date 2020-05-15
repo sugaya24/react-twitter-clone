@@ -8,6 +8,9 @@ const projectReducer = (state = initState, action) => {
     case 'ADD_POST_ERROR':
       console.log('add post error');
       return state;
+    case 'DELETE_POST':
+      console.log('delete post success');
+      return state;
     default:
       return state;
   }

@@ -1,5 +1,7 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export const createPost = (post) => {
-  return (dispatch, getState, { getFirebase, getFirestore }) => {
+  return (dispatch, getState, { getFirestore }) => {
     //make async call to database
     const firestore = getFirestore();
     firestore
@@ -8,6 +10,7 @@ export const createPost = (post) => {
         ...post,
         userName: 'test userName',
         authorId: 123,
+        postId: uuidv4(),
         createdAt: new Date(),
       })
       .then(() => {
