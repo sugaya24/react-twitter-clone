@@ -1,6 +1,8 @@
 import React from 'react';
+import { deletePost } from '../../store/actions/postAction';
+import { connect } from 'react-redux';
 
-export const PostSummary = ({ post }) => {
+export const PostSummary = ({ post, deletePost }) => {
   return (
     <div className="container">
       <div className="row">
@@ -13,7 +15,13 @@ export const PostSummary = ({ post }) => {
               </span>
               <p>{post.content}</p>
               <i className="material-icons">star_border</i>
-              <i className="material-icons">add</i>
+              <i
+                className="material-icons"
+                style={{ cursor: 'pointer' }}
+                onClick={(e) => deletePost(e, post.id)}
+              >
+                delete
+              </i>
             </div>
           </div>
         </div>
@@ -22,4 +30,13 @@ export const PostSummary = ({ post }) => {
   );
 };
 
-export default PostSummary;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deletePost: (e, id) => {
+      e.preventDefault();
+      dispatch(deletePost(id));
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(PostSummary);

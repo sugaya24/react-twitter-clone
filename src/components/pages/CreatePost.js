@@ -3,7 +3,9 @@ import { createPost } from '../../store/actions/postAction';
 import { connect } from 'react-redux';
 
 const CreatePost = ({ createPost }) => {
+  const [userName, setUserName] = useState('unknown');
   const [state, setState] = useState({
+    userName,
     content: '',
   });
 
@@ -14,6 +16,7 @@ const CreatePost = ({ createPost }) => {
   };
 
   const handleChange = (e) => {
+    setUserName(e.target.value);
     setState({
       ...state,
       [e.target.id]: e.target.value,
@@ -24,6 +27,10 @@ const CreatePost = ({ createPost }) => {
     <div className="container">
       <form onSubmit={handleSubmit} className="white">
         <h5 className="grey-text text-darken-3">Create a Post</h5>
+        <div className="input-field">
+          <label htmlFor="name">Name</label>
+          <input type="text" id="userName" onChange={handleChange} />
+        </div>
         <div className="input-field">
           <label htmlFor="content">Post</label>
           <textarea

@@ -8,7 +8,7 @@ export const createPost = (post) => {
       .collection('posts')
       .add({
         ...post,
-        userName: 'test userName',
+        // userName: 'test userName',
         authorId: 123,
         postId: uuidv4(),
         createdAt: new Date(),
@@ -18,6 +18,20 @@ export const createPost = (post) => {
       })
       .catch((err) => {
         dispatch({ type: 'ADD_POST_ERROR', err });
+      });
+  };
+};
+
+export const deletePost = (id) => {
+  return (dispatch, getState, { getFirestore }) => {
+    console.log(getState);
+    const firestore = getFirestore();
+    firestore
+      .collection('posts')
+      .doc(id)
+      .delete()
+      .then(() => {
+        dispatch({ type: 'DELETE_POST' });
       });
   };
 };
