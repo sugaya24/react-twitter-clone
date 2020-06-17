@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { createPost } from '../../store/actions/postAction';
 import { connect } from 'react-redux';
 
-const CreatePost = ({ createPost }) => {
+const CreatePost = ({ history, createPost }) => {
   const [userName, setUserName] = useState('unknown');
   const [state, setState] = useState({
     userName,
@@ -13,6 +13,7 @@ const CreatePost = ({ createPost }) => {
     e.preventDefault();
     console.log(state);
     createPost(state);
+    history.push('/');
   };
 
   const handleChange = (e) => {
