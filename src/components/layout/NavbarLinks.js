@@ -13,6 +13,12 @@ export const NavbarLinks = () => {
       <li>
         <NavLink to="/contact">Contact</NavLink>
       </li>
+      <li>
+        <NavLink to="/signin">Sign In</NavLink>
+      </li>
+      <li>
+        <NavLink to="/signup">Sign Up</NavLink>
+      </li>
     </ul>
   );
 };
