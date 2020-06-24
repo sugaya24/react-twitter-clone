@@ -4,6 +4,7 @@ import { Navbar } from './components/layout';
 import { Dashboard } from './components';
 import { About, Contact, CreatePost } from './components/pages';
 import SignIn from './components/auth/SignIn';
+import SignOut from './components/auth/SignOut';
 import SignUp from './components/auth/SignUp';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/contact" component={Contact} />
           <Route path="/create" component={CreatePost} />
           <Route path="/signin" component={SignIn} />
+          <Route path="/signout" component={SignOut} />
           <Route path="/signup" component={SignUp} />
         </Switch>
       </BrowserRouter>

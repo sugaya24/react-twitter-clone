@@ -1,7 +1,18 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export const NavbarLinks = () => {
+export const NavbarLinks = ({ auth }) => {
+  const isLoggedIn = auth.uid;
+  const authLink = isLoggedIn ? (
+    <li>
+      <NavLink to="/signout">Sign Out</NavLink>
+    </li>
+  ) : (
+    <li>
+      <NavLink to="/signin">Sign In</NavLink>
+    </li>
+  );
   return (
     <ul id="nav-mobile" className="right hide-on-med-and-down">
       <li>
@@ -13,9 +24,7 @@ export const NavbarLinks = () => {
       <li>
         <NavLink to="/contact">Contact</NavLink>
       </li>
-      <li>
-        <NavLink to="/signin">Sign In</NavLink>
-      </li>
+      {authLink}
       <li>
         <NavLink to="/signup">Sign Up</NavLink>
       </li>
@@ -23,4 +32,11 @@ export const NavbarLinks = () => {
   );
 };
 
-export default NavbarLinks;
+const mapStateToProps = (state) => {
+  return {
+    // authError: state.auth.authError,
+    auth: state.firebase.auth,
+  };
+};
+
+export default connect(mapStateToProps, null)(NavbarLinks);
