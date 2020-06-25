@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-export const NavbarLinks = ({ auth }) => {
+export const NavbarLinks = ({ auth, profile }) => {
   const isLoggedIn = auth.uid;
   const authLink = isLoggedIn ? (
     <li>
@@ -13,6 +13,13 @@ export const NavbarLinks = ({ auth }) => {
       <NavLink to="/signin">Sign In</NavLink>
     </li>
   );
+  const initialName = isLoggedIn ? (
+    <li>
+      <NavLink to="/" className="btn btn-floating pink lighten-1">
+        {profile.initials}
+      </NavLink>
+    </li>
+  ) : null;
   return (
     <ul id="nav-mobile" className="right hide-on-med-and-down">
       <li>
@@ -28,6 +35,7 @@ export const NavbarLinks = ({ auth }) => {
       <li>
         <NavLink to="/signup">Sign Up</NavLink>
       </li>
+      {initialName}
     </ul>
   );
 };
