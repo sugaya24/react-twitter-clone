@@ -1,8 +1,10 @@
 import React from 'react';
 import { deletePost } from '../../store/actions/postAction';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 export const PostSummary = ({ post, deletePost }) => {
+  console.log(post);
   return (
     <div className="container">
       <div className="row">
@@ -14,14 +16,19 @@ export const PostSummary = ({ post, deletePost }) => {
                 {post.userName}
               </span>
               <p>{post.content}</p>
-              <i className="material-icons">star_border</i>
-              <i
-                className="material-icons"
-                style={{ cursor: 'pointer' }}
-                onClick={(e) => deletePost(e, post.id)}
-              >
-                delete
-              </i>
+              <small>
+                {moment.unix(post.createdAt.seconds).utc().format('llll')}
+              </small>
+              <div>
+                <i className="material-icons">star_border</i>
+                <i
+                  className="material-icons"
+                  style={{ cursor: 'pointer' }}
+                  onClick={(e) => deletePost(e, post.id)}
+                >
+                  delete
+                </i>
+              </div>
             </div>
           </div>
         </div>
