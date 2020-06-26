@@ -3,7 +3,7 @@ import { deletePost } from '../../store/actions/postAction';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-export const PostSummary = ({ post, deletePost }) => {
+export const PostSummary = ({ auth, post, deletePost }) => {
   return (
     <div className="container">
       <div className="row">
@@ -20,13 +20,15 @@ export const PostSummary = ({ post, deletePost }) => {
               </small>
               <div>
                 <i className="material-icons">star_border</i>
-                <i
-                  className="material-icons"
-                  style={{ cursor: 'pointer' }}
-                  onClick={(e) => deletePost(e, post.id)}
-                >
-                  delete
-                </i>
+                {auth.uid === post.authorId ? (
+                  <i
+                    className="material-icons right"
+                    style={{ cursor: 'pointer' }}
+                    onClick={(e) => deletePost(e, post.id)}
+                  >
+                    delete
+                  </i>
+                ) : null}
               </div>
             </div>
           </div>
@@ -36,13 +38,21 @@ export const PostSummary = ({ post, deletePost }) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     deletePost: (e, id) => {
       e.preventDefault();
-      dispatch(deletePost(id));
+      if (window.confirm('Are you sure to delete this post?')) {
+        dispatch(deletePost(id));
+      }
     },
   };
 };
 
-export default connect(null, mapDispatchToProps)(PostSummary);
+export default connect(mapStateToProps, mapDispatchToProps)(PostSummary);
