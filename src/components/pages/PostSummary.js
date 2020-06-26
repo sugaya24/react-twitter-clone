@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 
 export const PostSummary = ({ post, deletePost }) => {
-  console.log(post);
   return (
     <div className="container">
       <div className="row">
@@ -13,7 +12,7 @@ export const PostSummary = ({ post, deletePost }) => {
             <div className="card-content">
               <span className="card-title">
                 <i className="material-icons">assignment_ind</i>
-                {post.userName}
+                {`${post.authorFirstName} ${post.authorLastName}`}
               </span>
               <p>{post.content}</p>
               <small>

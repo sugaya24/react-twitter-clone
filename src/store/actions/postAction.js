@@ -1,15 +1,18 @@
 import { v4 as uuidv4 } from 'uuid';
 
-export const createPost = (post) => {
+export const createPost = (post, userName) => {
   return (dispatch, getState, { getFirestore }) => {
     //make async call to database
     const firestore = getFirestore();
+    const profile = getState().firebase.profile;
+    const authorId = getState().firebase.auth.uid;
     firestore
       .collection('posts')
       .add({
         ...post,
-        // userName: 'test userName',
-        authorId: 123,
+        authorFirstName: profile.firstName,
+        authorLastName: profile.lastName,
+        authorId,
         postId: uuidv4(),
         createdAt: new Date(),
       })
