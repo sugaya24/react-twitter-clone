@@ -14,6 +14,7 @@ export const createPost = (post, userName) => {
         authorLastName: profile.lastName,
         authorId,
         postId: uuidv4(),
+        likedUserIDs: [],
         createdAt: new Date(),
       })
       .then(() => {

@@ -1,9 +1,10 @@
 import React from 'react';
 import { deletePost } from '../../store/actions/postAction';
+import { addFavorite } from '../../store/actions/favoriteActions';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-export const PostSummary = ({ auth, post, deletePost }) => {
+export const PostSummary = ({ auth, post, deletePost, addFavorite }) => {
   return (
     <div className="container">
       <div className="row">
@@ -19,7 +20,14 @@ export const PostSummary = ({ auth, post, deletePost }) => {
                 {moment.unix(post.createdAt.seconds).utc().format('llll')}
               </small>
               <div>
-                <i className="material-icons">star_border</i>
+                <i
+                  className="material-icons"
+                  style={{ cursor: 'pointer' }}
+                  onClick={(e) => addFavorite(e, post.id, auth.uid)}
+                >
+                  star_border
+                </i>
+                {post.likedUserIDs.length}
                 {auth.uid === post.authorId ? (
                   <i
                     className="material-icons right"
@@ -51,6 +59,10 @@ const mapDispatchToProps = (dispatch) => {
       if (window.confirm('Are you sure to delete this post?')) {
         dispatch(deletePost(id));
       }
+    },
+    addFavorite: (e, postId, currentUserId) => {
+      e.preventDefault();
+      dispatch(addFavorite(postId, currentUserId));
     },
   };
 };
