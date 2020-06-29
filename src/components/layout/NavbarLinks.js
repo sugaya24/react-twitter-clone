@@ -15,7 +15,10 @@ export const NavbarLinks = ({ auth, profile }) => {
   );
   const initialName = isLoggedIn ? (
     <li>
-      <NavLink to="/" className="btn btn-floating pink lighten-1">
+      <NavLink
+        to={`/${profile.firstName + profile.lastName}`}
+        className="btn btn-floating pink lighten-1"
+      >
         {profile.initials}
       </NavLink>
     </li>

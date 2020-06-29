@@ -6,6 +6,7 @@ import { About, Contact, CreatePost } from './components/pages';
 import SignIn from './components/auth/SignIn';
 import SignOut from './components/auth/SignOut';
 import SignUp from './components/auth/SignUp';
+import UserProfile from './components/pages/UserProfile';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/signin" component={SignIn} />
           <Route path="/signout" component={SignOut} />
           <Route path="/signup" component={SignUp} />
+          <Route path="/:slug" component={UserProfile} />
         </Switch>
       </BrowserRouter>
     </div>
