@@ -7,6 +7,7 @@ import SignIn from './components/auth/SignIn';
 import SignOut from './components/auth/SignOut';
 import SignUp from './components/auth/SignUp';
 import UserProfile from './components/pages/UserProfile';
+import UserLikes from './components/pages/UserLikes';
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
           <Route path="/signin" component={SignIn} />
           <Route path="/signout" component={SignOut} />
           <Route path="/signup" component={SignUp} />
-          <Route path="/:slug" component={UserProfile} />
+          <Route path="/:slug" exact component={UserProfile} />
+          <Route path="/:slug/likes" component={UserLikes} />
         </Switch>
       </BrowserRouter>
     </div>

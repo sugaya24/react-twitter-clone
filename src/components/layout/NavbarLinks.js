@@ -23,6 +23,7 @@ export const NavbarLinks = ({ auth, profile }) => {
       </NavLink>
     </li>
   ) : null;
+
   return (
     <ul id="nav-mobile" className="right hide-on-med-and-down">
       <li>
@@ -45,8 +46,8 @@ export const NavbarLinks = ({ auth, profile }) => {
 
 const mapStateToProps = (state) => {
   return {
-    // authError: state.auth.authError,
     auth: state.firebase.auth,
+    profile: state.firebase.profile,
   };
 };
 
