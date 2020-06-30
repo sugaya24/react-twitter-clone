@@ -8,6 +8,7 @@ import SignOut from './components/auth/SignOut';
 import SignUp from './components/auth/SignUp';
 import UserProfile from './components/pages/UserProfile';
 import UserLikes from './components/pages/UserLikes';
+import PostDetail from './components/pages/PostDetail';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/signup" component={SignUp} />
           <Route path="/:slug" exact component={UserProfile} />
           <Route path="/:slug/likes" component={UserLikes} />
+          <Route path="/:username/status/:postid" component={PostDetail} />
         </Switch>
       </BrowserRouter>
     </div>

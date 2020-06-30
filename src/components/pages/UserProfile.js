@@ -8,7 +8,6 @@ export const UserProfile = ({ auth, profile }) => {
   const createdAt = auth.createdAt ? +auth.createdAt : 0;
   const lastLoginAt = auth.lastLoginAt ? +auth.lastLoginAt : 0;
   const userName = profile.firstName + profile.lastName;
-  console.log('this is ' + userName);
 
   return (
     <div className="container">
