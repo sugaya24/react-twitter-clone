@@ -4,6 +4,11 @@ import { connect } from 'react-redux';
 
 export const NavbarLinks = ({ auth, profile }) => {
   const isLoggedIn = auth.uid;
+  const postLink = isLoggedIn ? (
+    <li>
+      <NavLink to="/create">Post</NavLink>
+    </li>
+  ) : null;
   const authLink = isLoggedIn ? (
     <li>
       <NavLink to="/signout">Sign Out</NavLink>
@@ -26,9 +31,7 @@ export const NavbarLinks = ({ auth, profile }) => {
 
   return (
     <ul id="nav-mobile" className="right hide-on-med-and-down">
-      <li>
-        <NavLink to="/create">Post</NavLink>
-      </li>
+      {postLink}
       <li>
         <NavLink to="/about">About</NavLink>
       </li>
