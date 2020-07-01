@@ -32,24 +32,40 @@ export const signUp = (newUser) => {
     const firebase = getFirebase();
     const firestore = getFirestore();
 
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(newUser.email, newUser.password)
-      .then((resp) => {
-        return firestore
-          .collection('users')
-          .doc(resp.user.uid)
-          .set({
-            firstName: newUser.firstName,
-            lastName: newUser.lastName,
-            initials: newUser.firstName[0] + newUser.lastName[0],
+    validateScreenName(newUser.screenName, firestore).then((res) => {
+      if (res) {
+        dispatch({
+          type: 'SCREENNAME_IS_ALREADY_USED',
+          err: { message: 'This @screenname is already used.' },
+        });
+      } else {
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(newUser.email, newUser.password)
+          .then((resp) => {
+            return firestore.collection('users').doc(resp.user.uid).set({
+              userName: newUser.userName,
+              screenName: newUser.screenName,
+            });
+          })
+          .then(() => {
+            dispatch({ type: 'SIGNUP_SUCCESS' });
+          })
+          .catch((err) => {
+            dispatch({ type: 'SIGNUP_ERROR', err });
           });
-      })
-      .then(() => {
-        dispatch({ type: 'SIGNUP_SUCCESS' });
-      })
-      .catch((err) => {
-        dispatch({ type: 'SIGNUP_ERROR', err });
-      });
+      }
+    });
   };
+};
+
+const validateScreenName = (screenName, firestore) => {
+  return firestore
+    .collection('users')
+    .where('screenName', '==', screenName)
+    .get()
+    .then((querySnapshot) => {
+      return querySnapshot.docs;
+    })
+    .catch((err) => console.log(err));
 };

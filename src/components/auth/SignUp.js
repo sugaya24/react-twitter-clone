@@ -7,8 +7,8 @@ export const SignUp = ({ auth, authError, signUp }) => {
   const [state, setState] = useState({
     email: '',
     password: '',
-    firstName: '',
-    lastName: '',
+    userName: '',
+    screenName: '',
   });
 
   const handleSubmit = (e) => {
@@ -38,19 +38,19 @@ export const SignUp = ({ auth, authError, signUp }) => {
           />
         </div>
         <div className="input-field">
-          <label htmlFor="firstName">First Name</label>
+          <label htmlFor="userName">Username</label>
           <input
             type="text"
-            id="firstName"
-            onChange={(e) => setState({ ...state, firstName: e.target.value })}
+            id="userName"
+            onChange={(e) => setState({ ...state, userName: e.target.value })}
           />
         </div>
         <div className="input-field">
-          <label htmlFor="lastName">Last Name</label>
+          <label htmlFor="screenName">@Screenname</label>
           <input
             type="text"
-            id="lastName"
-            onChange={(e) => setState({ ...state, lastName: e.target.value })}
+            id="screenName"
+            onChange={(e) => setState({ ...state, screenName: e.target.value })}
           />
         </div>
         <div className="input-field">

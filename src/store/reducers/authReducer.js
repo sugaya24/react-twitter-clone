@@ -37,6 +37,14 @@ const authReducer = (state = initState, action) => {
         authError: action.err.message,
       };
 
+    case 'SCREENNAME_IS_ALREADY_USED':
+      console.log('screenname is already used');
+      console.log(action.err.message);
+      return {
+        ...state,
+        authError: action.err.message,
+      };
+
     default:
       return state;
   }
