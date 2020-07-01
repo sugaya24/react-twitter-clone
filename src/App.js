@@ -9,6 +9,7 @@ import SignUp from './components/auth/SignUp';
 import UserProfile from './components/pages/UserProfile';
 import UserLikes from './components/pages/UserLikes';
 import PostDetail from './components/pages/PostDetail';
+import LikedUsers from './components/pages/LikedUsers';
 
 function App() {
   return (
@@ -25,7 +26,15 @@ function App() {
           <Route path="/signup" component={SignUp} />
           <Route path="/:slug" exact component={UserProfile} />
           <Route path="/:slug/likes" component={UserLikes} />
-          <Route path="/:username/status/:postid" component={PostDetail} />
+          <Route
+            path="/:username/status/:postid"
+            exact
+            component={PostDetail}
+          />
+          <Route
+            path="/:username/status/:postid/likes"
+            component={LikedUsers}
+          />
         </Switch>
       </BrowserRouter>
     </div>

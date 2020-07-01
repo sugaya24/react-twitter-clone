@@ -2,10 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { deletePost } from '../../store/actions/postAction';
 import { addFavorite } from '../../store/actions/favoriteActions';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
+import styled from 'styled-components';
 
-export const PostDetail = ({ auth, deletePost, addFavorite, location }) => {
+export const PostDetail = ({
+  auth,
+  profile,
+  deletePost,
+  addFavorite,
+  location,
+}) => {
   const post = location.state.post;
+  const userName = profile.firstName + profile.lastName;
+  const postId = post.id;
 
   return (
     <div className="container">
@@ -30,7 +40,16 @@ export const PostDetail = ({ auth, deletePost, addFavorite, location }) => {
                 >
                   star_border
                 </i>
-                {post.likedUserIDs.length}
+                <LikedUsersCount>
+                  <Link
+                    to={{
+                      pathname: `/${userName}/status/${postId}/likes`,
+                      state: { likedUserIDs: post.likedUserIDs },
+                    }}
+                  >
+                    {post.likedUserIDs.length} Like(s)
+                  </Link>
+                </LikedUsersCount>
                 {auth.uid === post.authorId ? (
                   <i
                     className="material-icons right"
@@ -72,3 +91,12 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);
+
+export const LikedUsersCount = styled.span`
+  a {
+    color: #000000;
+  }
+  :hover {
+    text-decoration: underline;
+  }
+`;
